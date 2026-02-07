@@ -1,4 +1,4 @@
-name: First-flow
+name: New flow
 on: push
 jobs:   
   lint:
@@ -7,6 +7,8 @@ jobs:
       - name: actions version
         uses: actions/checkout@v3
       - name: run npm ci
+        run: npm install
+      - name: npm installed
         run: npm ci
       - name: run npm run lint
         run: npm run lint
