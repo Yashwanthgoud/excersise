@@ -1,16 +1,32 @@
 name: First-flow
-on: workflow_dispatch
-jobs:
-  first-job:
+on: push
+jobs:   
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: actions version
         uses: actions/checkout@v3
-      - name: install nodejs
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: install dependencies
-        run: npm ci
-      - name: run test
+      - name: run npm lint
+        run: npm lint
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: actions version
+        uses: actions/checkout@v3
+      - name: run npm lint
         run: npm test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: actions version
+        uses: actions/checkout@v3
+      - name: run npm lint
+        run: npm build
+
+
+    
+
+
